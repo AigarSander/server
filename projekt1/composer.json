@@ -11,5 +11,11 @@
 
     "autoload": {
         "psr-4": { "BookingApp\\": "src" }
+    },
+
+    "require-dev": {
+	"phpunit/phpunit": "5.5.*",
+	"symfony/browser-kit": "^3.2",
+	"symfony/css-selector": "^3.2"
     }
 }
