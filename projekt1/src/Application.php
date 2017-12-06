@@ -10,6 +10,13 @@ class Application extends SilexApplication {
 
 	public function __construct(array $values = []) {
 		parent::__construct($values);
+		
+		$this->configureServices();
+		$this->createDBTables();
+		$this->configureControllers();
+	}
+
+	private function configureServices() {
 
 		$this['debug'] = true;
 
@@ -23,7 +30,9 @@ class Application extends SilexApplication {
 				'path' => __DIR__.'/../database/app.db',
 			],
 		]);
+	}
 
+	private function createDBTables() {
 		if (!$this['db']->getSchemaManager()->tableExist('bookings')) {
 			$this['db']->executeQuery(
 				"CREATE TABLE bookings (
@@ -42,11 +51,11 @@ class Application extends SilexApplication {
 				);"
 			);
 		}
+	}
 
+	private function configureControllers() {
 		$this->get('/bookings/create', function () {
 			return $this['twig']->render('base.html.twig');
 		});
-	
 	}
-
 }
